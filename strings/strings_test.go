@@ -1,9 +1,8 @@
 package strings
 
 import (
+	"reflect"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
 func TestGetAdded(t *testing.T) {
@@ -11,7 +10,10 @@ func TestGetAdded(t *testing.T) {
 	modified := []string{"red", "blue", "yellow"}
 
 	added := GetAdded(original, modified)
-	assert.Equal(t, added, []string{"yellow"})
+
+	if !reflect.DeepEqual(added, []string{"yellow"}) {
+		t.Errorf("expected removed to contain 'yellow' but it was %v", added)
+	}
 }
 
 func TestGetRemoved(t *testing.T) {
@@ -19,5 +21,19 @@ func TestGetRemoved(t *testing.T) {
 	modified := []string{"red", "blue", "yellow"}
 
 	removed := GetRemoved(original, modified)
-	assert.Equal(t, removed, []string{"green"})
+	if !reflect.DeepEqual(removed, []string{"green"}) {
+		t.Errorf("expected removed to contain 'green' but it was %v", removed)
+	}
+}
+
+func TestContains(t *testing.T) {
+	strings := []string{"red", "green", "blue"}
+
+	if !Contains(strings, "red") {
+		t.Errorf("expected contains to return true")
+	}
+
+	if Contains(strings, "purple") {
+		t.Errorf("expected contains to return false")
+	}
 }
