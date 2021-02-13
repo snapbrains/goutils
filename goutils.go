@@ -1,1 +1,1 @@
-package snaputils
+package goutils
