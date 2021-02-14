@@ -1,6 +1,10 @@
 package strings
 
-import ()
+import (
+	"crypto/sha1"
+	"sort"
+	str "strings"
+)
 
 // GetAdded takes two slices of strings as inputs and returns a new slice
 // containing the strings that have been added
@@ -35,4 +39,28 @@ func Contains(s []string, str string) bool {
 	}
 
 	return false
+}
+
+// HashIt turns a slice of strings into a hash
+func HashIt(s []string) string {
+	sort.Strings(s)
+	s = Unique(s)
+	joined := str.Join(s, "")
+
+	h := sha1.New()
+	h.Write([]byte(joined))
+	return string(h.Sum(nil))
+}
+
+// Unique takes a string slice and returns a new slice with duplicate values removed
+func Unique(s []string) []string {
+	keys := make(map[string]bool)
+	list := []string{}
+	for _, entry := range s {
+		if _, value := keys[entry]; !value {
+			keys[entry] = true
+			list = append(list, entry)
+		}
+	}
+	return list
 }

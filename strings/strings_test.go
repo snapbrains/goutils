@@ -37,3 +37,30 @@ func TestContains(t *testing.T) {
 		t.Errorf("expected contains to return false")
 	}
 }
+
+func TestHashIt(t *testing.T) {
+	strings1 := []string{"red", "green", "blue"}
+	strings2 := []string{"red", "blue", "green"}
+	strings3 := []string{"red", "blue", "yellow"}
+
+	one := HashIt(strings1)
+	two := HashIt(strings2)
+	three := HashIt(strings3)
+
+	if one != two {
+		t.Errorf("hash values should be the same")
+	}
+
+	if one == three {
+		t.Errorf("hash values should be different")
+	}
+}
+
+func TestUnique(t *testing.T) {
+	strings := []string{"red", "green", "blue", "blue"}
+
+	ret := Unique(strings)
+	if len(ret) != 3 {
+		t.Errorf("failed remove duplicate values")
+	}
+}
