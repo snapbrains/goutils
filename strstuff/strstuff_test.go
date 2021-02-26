@@ -1,4 +1,4 @@
-package strings
+package strstuff
 
 import (
 	"reflect"
@@ -26,15 +26,15 @@ func TestGetRemoved(t *testing.T) {
 	}
 }
 
-func TestContains(t *testing.T) {
+func TestInclude(t *testing.T) {
 	strings := []string{"red", "green", "blue"}
 
-	if !Contains(strings, "red") {
-		t.Errorf("expected contains to return true")
+	if !Include(strings, "red") {
+		t.Errorf("expected Include to return true")
 	}
 
-	if Contains(strings, "purple") {
-		t.Errorf("expected contains to return false")
+	if Include(strings, "purple") {
+		t.Errorf("expected Include to return false")
 	}
 }
 
