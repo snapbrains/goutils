@@ -110,3 +110,24 @@ func Map(vs []string, f func(string) string) []string {
 	}
 	return vsm
 }
+
+// RemoveAt removes the item at a given index
+func RemoveAt(vs []string, i int) []string {
+	if i < 0 {
+		return vs
+	}
+	if i > len(vs)-1 {
+		return vs
+	}
+	return append(vs[:i], vs[i+1:]...)
+}
+
+// Remove removes the item at a given index
+func Remove(vs []string, s string) []string {
+	for i, v := range vs {
+		if v == s {
+			vs = RemoveAt(vs, i)
+		}
+	}
+	return vs
+}
