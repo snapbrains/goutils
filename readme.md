@@ -1,4 +1,4 @@
-This go project provides the access to dynamodb for the snap projects
+This go project provides a set of utilities for working with Go
 
 # Build:
 go build
